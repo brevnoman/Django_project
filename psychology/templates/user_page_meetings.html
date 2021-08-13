@@ -1,0 +1,39 @@
+{% extends "user_page.html" %}
+
+
+{% block title %}
+Yur personal information
+{% endblock %}
+
+
+
+
+
+{% block user_content %}
+
+<div class="container py-5">
+  <form method="GET">
+    <ul>
+        {% for meeting in meetings %}
+        <p>
+            <h2>
+            {% if user.is_superuser %}
+
+                {{ meeting.user.first_name }}
+                {{ meeting.user.last_name }}
+            {% endif %}
+                {{ meeting.date }}
+                {{ meeting.time_start }}-{{ meeting.time_end }}
+            </h2>
+        </p>
+        <p class="text-center"><h5>Нажмите что бы посмотреть заключения.</h5><a href="/user_page/meetings/{{ meeting.id }}"><h4>Открыть</h4></a></p>
+        {% endfor %}
+    </ul>
+  </form>
+</div>
+
+
+
+
+
+{% endblock %}

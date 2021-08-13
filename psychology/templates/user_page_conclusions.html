@@ -1,0 +1,41 @@
+{% extends "user_page.html" %}
+
+
+{% block title %}
+Yur personal information
+{% endblock %}
+
+
+
+
+
+{% block user_content %}
+
+<div class="container py-5">
+  <form method="GET">
+    <ul>
+        <h1>{{ meeting }}</h1>
+
+        {% if conclusions %}
+        <h2>Заключения</h2>
+        {% for conclusion in conclusions %}
+        <p>
+        <h2>
+            {{ conclusion.conclusion_desc }}
+            {{ conclusion.create_time }}
+        </h2>
+        {% endfor %}
+        </p>
+        {% else %}
+            <h2>Пока нет заключений</h2>
+
+        {% endif %}
+    </ul>
+  </form>
+</div>
+
+
+
+
+
+{% endblock %}

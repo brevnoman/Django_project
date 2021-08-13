@@ -1,0 +1,24 @@
+{% extends "user_page.html" %}
+
+
+{% block title %}
+Yur personal information
+{% endblock %}
+
+
+
+
+
+{% block user_content %}
+
+{% load crispy_forms_tags %}
+<div class="container py-5">
+	<h1>Заполните форму</h1>
+	<form method="POST">
+		{% csrf_token %}
+		{{ meeting_form|crispy }}
+		<button class="btn btn-primary" type="submit">Изменить</button>
+	</form>
+</div>
+
+{% endblock %}
