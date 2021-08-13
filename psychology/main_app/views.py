@@ -27,6 +27,8 @@ def calendar(request, year= datetime.datetime.today().year, month=datetime.datet
     next_month = (datetime.datetime(year=current_year, month=current_month, day=27)+datetime.timedelta(days=15)).month
     next_year = (datetime.datetime(year=current_year, month=current_month, day=27)+datetime.timedelta(days=15)).year
     print(next_month)
+    month_for_now = datetime.datetime.today().month
+    year_for_now = datetime.datetime.today().year
     first_week = True
     day = 1
     meetings = show_undone_meetings()
@@ -69,13 +71,15 @@ def calendar(request, year= datetime.datetime.today().year, month=datetime.datet
     return render(request, "Backup.html", context={"cal": current_month_list,
                                                    "html_code": html_thing,
                                                    'num': just_number,
-                                                   'year': current_year,
-                                                   "month": current_month,
+                                                   'year': year_for_now,
+                                                   "month": month_for_now,
                                                    "previous_month": previous_month,
                                                    "next_month": next_month,
                                                    "previous_year":previous_year,
                                                    'next_year': next_year,
-                                                   "current_month_text": current_month_text[current_month-1]})
+                                                   "current_month_text": current_month_text[current_month-1],
+                                                   "now_year": current_year,
+                                                   "now_month": current_month})
 
 
 def user_page(request):
