@@ -15,7 +15,7 @@ def date_meetings(request, meetings_date):
     return render(request, "user_page_meetings.html", context={"meetings": meetings, 'year': current_year, "month": current_month})
 
 #delete it
-def calendar(request, year= datetime.datetime.today().year, month=datetime.datetime.today().month):
+def calendar(request, year, month):
     current_month_list = []
     current_year = int(year)
     current_month = int(month)
