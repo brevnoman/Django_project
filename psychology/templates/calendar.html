@@ -1,0 +1,23 @@
+{% extends "user_page.html" %}
+
+
+{% block title %}
+Calendar
+{% endblock %}
+
+{% block user_content %}
+<h4>{{ current_month_text }} {{ now_year }}</h4>
+  <table cellspacing="0" align="center">
+   <tr>
+        <th>Понедельник</th><th>Вторник</th><th>Среда</th><th>Четверг</th><th>Пятница</th><th>Суббота</th><th>Воскресенье</th>
+   </tr>
+   {% for week in cal %}
+      <tr>
+       {% for day in week %}
+    <td class="even">{{ day|safe }}</td>
+          {% endfor %}
+   </tr>
+      {% endfor %}
+  </table>
+<p align="center"><a href="/calendar/year={{ previous_year }}&month={{ previous_month }}"><-Предыдущий</a><><a href="/calendar/year={{ next_year }}&month={{ next_month }}">Следующий-></a></p>
+{% endblock %}
