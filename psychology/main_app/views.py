@@ -128,11 +128,14 @@ def user_page_editing(request):
             messages.success(request, "Аккаунт изменён")
             return redirect("/user_page")
         messages.error(request, "Не верно указаны данные")
-    form = NewUserChangeForm()
-    form.base_fields["first_name"].initial = request.user.first_name
-    form.base_fields["last_name"].initial = request.user.last_name
-    form.base_fields["email"].initial = request.user.email
-    form.base_fields["username"].initial = request.user.username
+    form = NewUserChangeForm(initial={"first_name": request.user.first_name,
+                                      "last_name": request.user.last_name,
+                                      "email": request.user.email,
+                                      "username": request.user.username})
+    # form.base_fields["first_name"].initial = request.user.first_name
+    # form.base_fields["last_name"].initial = request.user.last_name
+    # form.base_fields["email"].initial = request.user.email
+    # form.base_fields["username"].initial = request.user.username
     current_year = datetime.datetime.today().year
     current_month = datetime.datetime.today().month
     return render(request=request, template_name="user_page_edit.html", context={"meeting_form": form, 'year': current_year, "month": current_month})
