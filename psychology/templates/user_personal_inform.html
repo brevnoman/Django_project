@@ -13,18 +13,25 @@ Your personal information
 
 <div class="container py-5">
   <form method="GET">
-    <h1>Личная информация</h1>
+    <h1 align="center">Личная информация</h1>
        <h2>
-          {{ user.first_name }} {{ user.last_name }}
+           {% if user.first_name %}
+           {{ user.first_name }}
+           {% endif %}
+           {% if user.last_name %}
+           {{ user.last_name }}
+           {% endif %}
        </h2>
     <p>
       <h3>
-          Ваш email: {{ user.email }}
+        {% if user.email %}
+          Email: {{ user.email }}
+        {% endif %}
       </h3>
     </p>
     <p>
       <h3>
-        Ваш логин: {{ user.username }}
+        Логин: {{ user.username }}
       </h3>
     </p>
   </form>

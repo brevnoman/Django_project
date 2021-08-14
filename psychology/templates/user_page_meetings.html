@@ -16,9 +16,8 @@ Meetings
     <ul>
         {% for meeting in meetings %}
         <p>
-            <h2>
+            <h2 align="center" class="featurette-heading">
             {% if user.is_superuser %}
-
                 {{ meeting.user.first_name }}
                 {{ meeting.user.last_name }}
             {% endif %}
@@ -26,7 +25,10 @@ Meetings
                 {{ meeting.time_start }}-{{ meeting.time_end }}
             </h2>
         </p>
-        <p class="text-center"><h5>Нажмите что бы посмотреть заключения.</h5><a href="/user_page/meetings/{{ meeting.id }}"><h4>Открыть</h4></a></p>
+        <p class="text-center"><h5 align="center">Нажмите что бы посмотреть заключения.</h5></p>
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary" type="button" href="/user_page/meetings/{{ meeting.id }}">Открыть</a>
+        </div>
         {% endfor %}
     </ul>
   </form>

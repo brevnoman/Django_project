@@ -38,14 +38,14 @@ def calendar_util(year, month):
                             meet_is_true = True
                             needed_meet = meet
                     if meet_is_true:
-                        html = f'<a href="/user_page/meetings_of_date/{needed_meet.date}">{str(needed_meet.date)[8:10]}</a>'
+                        html = f'<a href="/user_page/meetings_of_date/{needed_meet.date}" class="btn btn-primary btn-sm"><h6>{str(needed_meet.date)[8:10]}</h6</a>'
                         current_week.append(html)
                         meet_is_true = False
                     else:
                         if day < 10:
-                            current_week.append(f"0{day}")
+                            current_week.append(f'<a class="btn btn-secondary btn-sm"><h6>0{day}</h6</a>')
                         else:
-                            current_week.append(day)
+                            current_week.append(f'<a class="btn btn-secondary btn-sm"><h6>{day}</h6</a>')
                     day += 1
             first_week = False
             current_month_list.append(current_week)

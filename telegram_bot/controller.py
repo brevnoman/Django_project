@@ -19,5 +19,6 @@ def say_me_when_work(bot, update):
         time.sleep(3600)
 
 
+
 def say_me_when(bot, update):
-    schedule.every(1).minute.do(say_me_when_work(bot, update))
+    say_me_when_work(bot, update)

@@ -14,21 +14,21 @@ Conclusion
 <div class="container py-5">
   <form method="GET">
     <ul>
-        <h1>{{ meeting }}</h1>
+        <h1 align="center">{{ meeting }}</h1>
 
         {% if conclusions %}
-        <h2>Заключения</h2>
+        <h2 align="center">Заключения</h2>
+        </br>
         {% for conclusion in conclusions %}
         <p>
-        <h2>
+        <h2 align="center">
             {{ conclusion.conclusion_desc }}
             {{ conclusion.create_time }}
         </h2>
         {% endfor %}
         </p>
         {% else %}
-            <h2>Пока нет заключений</h2>
-
+            <h2 align="center">Пока нет заключений</h2>
         {% endif %}
     </ul>
   </form>

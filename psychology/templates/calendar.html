@@ -7,6 +7,10 @@ Calendar
 
 {% block user_content %}
 <h4>{{ current_month_text }} {{ now_year }}</h4>
+<p align="center">
+    <a class="btn btn-primary" type="button" href="/calendar/year={{ previous_year }}&month={{ previous_month }}"><-Предыдущий месяц</a>
+    <a class="btn btn-primary" type="button" href="/calendar/year={{ next_year }}&month={{ next_month }}">Следующий месяц-></a>
+</p>
   <table cellspacing="0" align="center">
    <tr>
         <th>Понедельник</th><th>Вторник</th><th>Среда</th><th>Четверг</th><th>Пятница</th><th>Суббота</th><th>Воскресенье</th>
@@ -19,5 +23,5 @@ Calendar
    </tr>
       {% endfor %}
   </table>
-<p align="center"><a href="/calendar/year={{ previous_year }}&month={{ previous_month }}"><-Предыдущий</a><><a href="/calendar/year={{ next_year }}&month={{ next_month }}">Следующий-></a></p>
+
 {% endblock %}
