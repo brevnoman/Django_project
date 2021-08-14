@@ -10,8 +10,8 @@ Base = declarative_base()
 Session = sessionmaker()
 Session.configure(bind=engine)
 
-class Meetings(Base):
-    __tablename__ = "main_app_meetings"
+class Meeting(Base):
+    __tablename__ = "main_app_meeting"
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("auth_user.id"))
