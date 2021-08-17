@@ -20,6 +20,10 @@ class Meeting(models.Model):
         verbose_name = "Встреча"
         verbose_name_plural = 'Встречи'
 
+    def save(self, *args, **kwargs):
+        if self.is_accepted and not self.is_done:
+            pass
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         if self.is_accepted:
