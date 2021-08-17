@@ -1,8 +1,14 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django.contrib.auth.models import User
 from main_app.models import Meeting, Conclusion
+from phonenumber_field.formfields import PhoneNumberField
 
+
+class NewAuthenticationForm(AuthenticationForm):
+    class Meta:
+        fields = ["username", "password"]
+        labels = {"username": "Логин", "password": "Пароль"}
 
 
 class NewConclusionCreate(forms.ModelForm):
@@ -12,12 +18,22 @@ class NewConclusionCreate(forms.ModelForm):
         fields = ["conclusion_desc"]
 
 
-
 class NewUserChangeForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ["username", 'first_name', 'last_name', "email"]
-        exclude = ["password1", "password2", "last_login", "is_superuser", "_groups", "_user_permissions", "is_staff", "is_active", 'date_joined']
+        fields = ["username",
+                  'first_name',
+                  'last_name',
+                  "email"]
+        exclude = ["password1",
+                   "password2",
+                   "last_login",
+                   "is_superuser",
+                   "_groups",
+                   "_user_permissions",
+                   "is_staff",
+                   "is_active",
+                   'date_joined']
         labels = {
             "username": "Логин",
             'first_name': "Имя",
@@ -26,15 +42,14 @@ class NewUserChangeForm(UserChangeForm):
         }
 
 
-
 class MeetingCreateForm(forms.ModelForm):
-    phone_number = forms.CharField(max_length=255, label="Номер телефона", required=True)
+    phone_number = PhoneNumberField(label="Номер телефона")
     description = forms.TextInput
     user = forms.IntegerField
 
     class Meta:
         model = Meeting
-        fields = ("phone_number", "description")
+        fields = ["phone_number", "description"]
         labels = {
             'description': "Описание причины обращения",
         }
@@ -48,14 +63,28 @@ class MeetingCreateForm(forms.ModelForm):
         return meeting
 
 
+
+
+
 class NewUserForm(UserCreationForm):
     email = forms.EmailField()
-    first_name = forms.CharField
-    last_name = forms.CharField
+    first_name = forms.CharField(label="Имя")
+    last_name = forms.CharField(label="Фамилия")
 
     class Meta:
         model = User
-        fields = ("username","first_name", "last_name", 'email', 'password1', "password2")
+        fields = ["username",
+                  "first_name",
+                  "last_name",
+                  'email',
+                  'password1',
+                  "password2"
+        ]
+        labels = {
+            "username": "Логин",
+            "password1": "Пароль",
+            "password2": "Повторите пароль"
+        }
 
     def save(self, commit=True):
         user = super(NewUserForm, self).save(commit=False)

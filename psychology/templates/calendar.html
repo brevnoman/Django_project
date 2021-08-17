@@ -9,6 +9,7 @@ Calendar
 <h4>{{ current_month_text }} {{ now_year }}</h4>
 <p align="center">
     <a class="btn btn-primary" type="button" href="/calendar/year={{ previous_year }}&month={{ previous_month }}"><-Предыдущий месяц</a>
+    <a class="btn btn-primary" type="button" href="/calendar/year={{ year }}&month={{ month }}">Текущий месяц</a>
     <a class="btn btn-primary" type="button" href="/calendar/year={{ next_year }}&month={{ next_month }}">Следующий месяц-></a>
 </p>
   <table cellspacing="0" align="center">
@@ -23,5 +24,6 @@ Calendar
    </tr>
       {% endfor %}
   </table>
+<h4 align="center">Сегодня: {{ today }}</h4>
 
 {% endblock %}

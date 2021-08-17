@@ -1,7 +1,7 @@
 from telegram.ext import Updater
 from telegram_bot.utils import get_logger
 from telegram_bot.handlers import say_me_when_hendler
-from telegram_bot.models import Base, engine, Session
+from telegram_bot.models import Base, engine
 
 
 def main():

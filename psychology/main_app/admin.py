@@ -1,6 +1,5 @@
 from django.contrib import admin
 from main_app.models import Meeting, Conclusion
-from main_app.forms import NewConclusionCreate
 
 
 STATUS_CHOICES = (
@@ -8,6 +7,8 @@ STATUS_CHOICES = (
     ('p', 'Published'),
     ('w', 'Withdrawn'),
 )
+
+
 
 
 class ConclusionAddAdmin(admin.StackedInline):
@@ -21,7 +22,7 @@ class MeetingsAdmin(admin.ModelAdmin):
     exclude = ["id", "user"]
     readonly_fields = ['description', 'phone_number']
     fields = ['description', 'phone_number', 'time_start', 'time_end', 'date', 'is_accepted', 'is_done']
-    inlines = [ConclusionAddAdmin,]
+    inlines = [ConclusionAddAdmin]
 
 
 

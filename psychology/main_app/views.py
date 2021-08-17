@@ -1,20 +1,24 @@
 import datetime
 from main_app.utils import calendar_util, show_undone_meetings, get_user_meetings, get_user_conclusions
 from django.shortcuts import render, redirect
-from main_app.forms import NewUserForm, MeetingCreateForm, NewUserChangeForm, User
+from main_app.forms import NewUserForm, MeetingCreateForm, NewUserChangeForm, User, NewAuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
-from main_app.models import Meeting, Conclusion
+from django.contrib.auth.forms import PasswordChangeForm
+from main_app.models import Meeting
+
+def password_change(request):
+    form = PasswordChangeForm(request.user)
+    return render(request, "password_change.html", context={"form": form})
 
 
 def date_meetings(request, meetings_date):
     current_year = datetime.datetime.today().year
     current_month = datetime.datetime.today().month
-    meetings = Meeting.objects.filter(is_accepted=True, is_done=False, date=meetings_date).order_by("time_start").all()
+    meetings = Meeting.objects.filter(is_accepted=True, date=meetings_date).order_by("time_start").all()
     return render(request, "user_page_meetings.html", context={"meetings": meetings, 'year': current_year, "month": current_month})
 
-#delete it
+
 def calendar(request, year, month):
     context = calendar_util(year, month)
     return render(request, "calendar.html", context=context)
@@ -97,7 +101,7 @@ def register_page(request):
 
 def login_request(request):
     if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
+        form = NewAuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -110,7 +114,7 @@ def login_request(request):
                 messages.error(request, "Invalid username or password.")
         else:
             messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
+    form = NewAuthenticationForm()
     return render(request=request, template_name="login.html", context={"login_form": form})
 
 
