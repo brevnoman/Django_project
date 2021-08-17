@@ -5,6 +5,7 @@ from telegram_bot.models import Meeting, Session, User
 
 def say_me_when(bot, update):
     session = Session()
+    repeat_time = 3600
     while True:
         meetings = session.query(Meeting).filter(Meeting.is_accepted == True).all()
         print('hi')
@@ -17,4 +18,4 @@ def say_me_when(bot, update):
                     datetime.datetime.combine(meeting.date, meeting.time_start))[:13]:
                 text = f"Через час у вас встреча с {session.query(User.first_name, User.last_name).filter(User.id == meeting.user_id).first()}  c {meeting.time_start} до {meeting.time_end}\n"
                 update.bot.send_message(chat_id=bot.effective_chat.id, text=text)
-        time.sleep(3600)
+        time.sleep(repeat_time)

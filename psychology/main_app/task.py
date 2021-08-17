@@ -3,7 +3,7 @@ from background_task import background
 from main_app.utils import show_all_meetings
 
 
-@background(schedule=60)
+@background(schedule=10)
 def is_done_meeting():
     meetings = show_all_meetings()
     for meeting in meetings:
